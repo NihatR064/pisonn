@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Barışaq? 💖</title>
+    <style>
+         :root {
+            --bg1: #ff9a9e;
+            --bg2: #fad0c4;
+            --bg3: #fbc2eb;
+            --bg4: #a6c1ee;
+            --card: #ffffffcc;
+            --text: #1f2937;
+            --accent: #ec4899;
+            --yes: #10b981;
+            --no: #ef4444;
+        }
+        
+        * {
+            box-sizing: border-box
+        }
+        
+        html,
+        body {
+            height: 100%
+        }
+        
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text);
+            background: radial-gradient(1200px 800px at 20% -10%, var(--bg3), transparent 60%), radial-gradient(1200px 800px at 120% 110%, var(--bg4), transparent 60%), linear-gradient(135deg, var(--bg1), var(--bg2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            overflow: hidden;
+        }
+        
+        .card {
+            width: min(560px, 94vw);
+            background: var(--card);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, .5);
+            border-radius: 28px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .12);
+            padding: 28px;
+            text-align: center;
+            position: relative;
+            transition: transform .3s ease;
+            animation: pop .5s cubic-bezier(.2, .8, .2, 1);
+        }
+        
+        @keyframes pop {
+            from {
+                transform: scale(.96);
+                opacity: 0
+            }
+            to {
+                transform: scale(1);
+                opacity: 1
+            }
+        }
+        
+        h1 {
+            margin: .2rem 0 1rem;
+            font-size: clamp(26px, 4.5vw, 36px)
+        }
+        
+        p.lead {
+            margin: 0 0 18px;
+            font-size: clamp(14px, 2.8vw, 16px);
+            opacity: .9
+        }
+        
+        .btns {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 10px
+        }
+        
+        button {
+            border: 0;
+            cursor: pointer;
+            border-radius: 999px;
+            padding: 14px 22px;
+            font-weight: 700;
+            font-size: 16px;
+            transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, .12);
+        }
+        
+        #yesBtn {
+            background: linear-gradient(135deg, #34d399, #10b981);
+            color: white
+        }
+        
+        #yesBtn:hover {
+            transform: translateY(-2px) scale(1.03)
+        }
+        
+        #noBtn {
+            background: linear-gradient(135deg, #f87171, #ef4444);
+            color: white
+        }
+        
+        #noBtn:hover {
+            transform: translateY(-2px) scale(1.03)
+        }
+        /* Fullscreen HƏ flood */
+        
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: #ffffffee;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 50
+        }
+        
+        .overlay.show {
+            display: flex
+        }
+        
+        .flood {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 6px;
+            padding: 10px;
+            opacity: .15;
+            user-select: none
+        }
+        
+        .flood span {
+            font-weight: 900;
+            font-size: 32px;
+            text-align: center
+        }
+        
+        .overlay .center {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            text-align: center;
+        }
+        
+        .overlay h2 {
+            font-size: clamp(34px, 8vw, 64px);
+            margin: 0
+        }
+        
+        .overlay #yesBig {
+            padding: 18px 30px;
+            font-size: clamp(18px, 3.2vw, 22px)
+        }
+        /* Love message */
+        
+        .love {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            text-align: center
+        }
+        
+        .love.show {
+            display: flex
+        }
+        
+        .love h2 {
+            font-size: clamp(36px, 8vw, 64px);
+            margin: 0
+        }
+        
+        .love p {
+            margin: 0;
+            font-size: clamp(16px, 3.2vw, 20px)
+        }
+        /* Floating hearts */
+        
+        .hearts {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 22px;
+            animation: floatUp 4s linear infinite;
+            opacity: .85
+        }
+        
+        @keyframes floatUp {
+            0% {
+                transform: translateY(20px) scale(.9);
+                opacity: 0
+            }
+            10% {
+                opacity: 1
+            }
+            100% {
+                transform: translateY(-110vh) scale(1.4);
+                opacity: 0
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card" id="card">
+        <h1>Barışaq? 💖</h1>
+        <p class="lead">Gəlin səmimi olaq… Sən mənim üçün çox dəyərlisən. Kiçik bir <em>Hə</em> hər şeyi düzəldə bilər. 💫</p>
+        <div class="btns">
+            <button id="yesBtn" aria-label="Hə">Hə</button>
+            <button id="noBtn" aria-label="Yox">Yox</button>
+        </div>
+    </div>
+
+    <!-- Fullscreen overlay after 7 "Yox" -->
+    <div class="overlay" id="overlay">
+        <div class="flood" id="flood"></div>
+        <div class="center">
+            <h2>Artıq yalnız bir seçim var 😌</h2>
+            <button id="yesBig">Hə 💚</button>
+        </div>
+    </div>
+
+    <!-- Final love message -->
+    <div class="love" id="love">
+        <h2>Səni sevirəm ❤️</h2>
+        <p>Barışdıq! Yeni səhifə açaq 💞</p>
+        <button onclick="location.reload()">Yenidən başla</button>
+    </div>
+
+    <div class="hearts" id="hearts"></div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const card = document.getElementById('card');
+        const overlay = document.getElementById('overlay');
+        const flood = document.getElementById('flood');
+        const yesBig = document.getElementById('yesBig');
+        const love = document.getElementById('love');
+        const hearts = document.getElementById('hearts');
+
+        const noVariants = [
+            'Hələ yox 😅',
+            'Bir az düşünüm…',
+            'Əmin deyiləm',
+            'Yox e…',
+            'Zarafat edirəm 🙈',
+            'Bir az da naz edim',
+            'Yaxşı, yaxşı…'
+        ];
+
+        let noCount = 0;
+
+        function growYes(times) {
+            const scale = 1 + Math.min(times * 0.25, 2.2); // cap the growth
+            yesBtn.style.transform = `scale(${scale})`;
+        }
+
+        function showFlood() {
+            // Fill the screen with many "HƏ"s
+            flood.innerHTML = '';
+            const cols = Math.ceil(window.innerWidth / 90);
+            const rows = Math.ceil(window.innerHeight / 60);
+            const total = cols * rows;
+            for (let i = 0; i < total; i++) {
+                const s = document.createElement('span');
+                s.textContent = 'HƏ';
+                flood.appendChild(s);
+            }
+            overlay.classList.add('show');
+        }
+
+        function celebrate() {
+            // create floating hearts for a few seconds
+            for (let i = 0; i < 30; i++) {
+                const h = document.createElement('div');
+                h.className = 'heart';
+                h.textContent = ['❤', '💖', '💘', '💗', '💓', '💕'][Math.floor(Math.random() * 6)];
+                h.style.left = Math.random() * 100 + 'vw';
+                h.style.bottom = '-20px';
+                h.style.animationDelay = (Math.random() * 2) + 's';
+                h.style.fontSize = (18 + Math.random() * 20) + 'px';
+                hearts.appendChild(h);
+                setTimeout(() => h.remove(), 6000);
+            }
+        }
+
+        function finishLove() {
+            document.body.style.overflow = 'hidden';
+            card.style.display = 'none';
+            overlay.classList.remove('show');
+            love.classList.add('show');
+            celebrate();
+        }
+
+        yesBtn.addEventListener('click', finishLove);
+        yesBig.addEventListener('click', finishLove);
+
+        noBtn.addEventListener('click', () => {
+            noCount++;
+            growYes(noCount);
+            if (noCount <= noVariants.length) {
+                noBtn.textContent = noVariants[noCount - 1];
+            }
+            if (noCount >= 7) {
+                // force the overlay
+                noBtn.disabled = true;
+                noBtn.style.opacity = .6;
+                showFlood();
+            }
+        });
+
+        // subtle wobble if trying to hover over No (optional)
+        noBtn.addEventListener('mouseover', () => {
+            if (noCount >= 4) {
+                const dx = (Math.random() * 14 - 7);
+                const dy = (Math.random() * 10 - 5);
+                noBtn.style.transform = `translate(${dx}px, ${dy}px)`;
+                setTimeout(() => noBtn.style.transform = 'translate(0,0)', 160);
+            }
+        });
+    </script>
+</body>
+
+</html>
